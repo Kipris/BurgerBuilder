@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import classes from './Layout.module.scss';
 
 class Layout extends Component {
@@ -26,7 +26,6 @@ class Layout extends Component {
                 <SideDrawer 
                     open={this.state.showSideDrawer} 
                     closed={this.sideDrawerClosedHandler} />
-                <div>Backdrop</div>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
