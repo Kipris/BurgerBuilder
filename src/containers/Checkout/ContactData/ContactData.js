@@ -81,6 +81,22 @@ class ContactData extends Component {
             });
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        // console.log(event.target.value);
+
+        // object deep clone
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        };
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+        this.setState({orderForm: updatedOrderForm});
+    }
+
     render() { 
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
@@ -98,13 +114,9 @@ class ContactData extends Component {
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.value}
-                        placeholder={formElement.config.elementConfig.placeholder} />
+                        placeholder={formElement.config.elementConfig.placeholder}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                {/* <Input inputtype="input" type="text" name="name" placeholder="Your name" />
-                <Input inputtype="input" type="email" name="email" placeholder="Your email" />
-                <Input inputtype="input" type="text" name="country" placeholder="Your country" />
-                <Input inputtype="input" type="text" name="street" placeholder="Your street" />
-                <Input inputtype="input" type="text" name="postal" placeholder="Your postal code" /> */}
                 <Button 
                     btnType="Success"
                     clicked={this.orderHandler}>Order</Button>
