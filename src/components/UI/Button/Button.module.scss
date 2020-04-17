@@ -18,5 +18,9 @@
     &.Danger {
         color: #944317;
     }
+    &[disabled] {
+        cursor: not-allowed;
+        color: #ccc;
+    }
 }
 

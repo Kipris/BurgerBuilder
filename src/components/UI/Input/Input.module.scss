@@ -20,6 +20,10 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
+    &.Invalid {
+        border-color: red;
+        background-color: #FDA49A;
+    }
     &:focus {
         outline: none;
         background-color: #ccc;
