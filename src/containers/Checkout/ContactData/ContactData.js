@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -103,8 +105,8 @@ class ContactData extends Component {
         }
 
         const order = {
-            ingredients: this.props.ingredients,
-            price: this.props.totalPrice, //in real apps the price should be calculated on the server side
+            ingredients: this.props.ings,
+            price: this.props.price, //in real apps the price should be calculated on the server side
             orderData: formData
         }
         axios.post('/orders.json', order)
@@ -130,6 +132,14 @@ class ContactData extends Component {
         }
         if (rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
+        }
+        if (rules.isEmail) {
+            const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            isValid = pattern.test(value) && isValid;
+        }
+        if (rules.isNumeric) {
+            const pattern = /^\d+$/;
+            isValid = pattern.test(value) && isValid;
         }
         return isValid;
     }
@@ -193,5 +203,12 @@ class ContactData extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
  
-export default withRouter(ContactData);
+export default connect(mapStateToProps)(withRouter(ContactData));
