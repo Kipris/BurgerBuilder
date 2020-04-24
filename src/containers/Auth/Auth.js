@@ -38,8 +38,7 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             }
-        },
-        formIsValid: false
+        }
     };
 
     checkValidity(value, rules) {
@@ -109,8 +108,7 @@ class Auth extends Component {
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 <Button 
-                    btnType="Success"
-                    disabled={!this.state.formIsValid}>Submit</Button>
+                    btnType="Success">Submit</Button>
             </form>
         );
 
