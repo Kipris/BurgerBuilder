@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 import './index.css';
 import App from './containers/App';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import reducer from './store/reducer';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
 
-const store = createStore(reducer);
+const rootReducer = combineReducers({
+  bb: burgerBuilderReducer
+})
+
+const store = createStore(
+  burgerBuilderReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>
