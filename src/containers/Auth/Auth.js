@@ -38,7 +38,8 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             }
-        }
+        },
+        isSignup: true
     };
 
     checkValidity(value, rules) {
@@ -76,12 +77,19 @@ class Auth extends Component {
         this.setState({controls: updatedControls});
     }
 
-    handleSubmit = (event) => {
+    submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(
             this.state.controls.email.value,
-            this.state.controls.password.value
+            this.state.controls.password.value,
+            this.state.isSignup
         );
+    }
+
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {isSignup: !prevState.isSignup};
+        })
     }
 
     render() { 
@@ -94,7 +102,7 @@ class Auth extends Component {
         }
 
         let form = (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.submitHandler}>
                 {formElementsArray.map(formElement => (
                     <Input 
                         key={formElement.id}
@@ -107,8 +115,9 @@ class Auth extends Component {
                         placeholder={formElement.config.elementConfig.placeholder}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                <Button 
-                    btnType="Success">Submit</Button>
+                <Button btnType="Success">
+                    {this.state.isSignup ? 'Signup' : 'Signin'}
+                </Button>
             </form>
         );
 
@@ -116,6 +125,11 @@ class Auth extends Component {
             <div className={classes.Auth}>
                 <h4>Enter your contact data</h4>
                 {form}
+                <Button 
+                    btnType="Danger"
+                    clicked={this.switchAuthModeHandler}>
+                    Switch to {this.state.isSignup ? 'Signin' : 'Signup'}
+                </Button>
             </div>
         );
     }
@@ -123,7 +137,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actionCreators.auth(email, password))
+        onAuth: (email, password, isSignup) => dispatch(actionCreators.auth(email, password, isSignup))
     }
 }
  
