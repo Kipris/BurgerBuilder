@@ -131,7 +131,7 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
-                <h4>Enter your contact data</h4>
+                <h4>Enter your data to {this.state.isSignup ? 'signup a new user' : 'signin your account'}</h4>
                 {errorMessage}
                 {form}
                 <Button 
