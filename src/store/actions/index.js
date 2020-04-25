@@ -10,4 +10,4 @@ export {
 
 export { 
     auth,
-    checkAuthTimeout } from './auth';
+    authLogout } from './auth';
