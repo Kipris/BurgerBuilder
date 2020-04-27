@@ -7,7 +7,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null
         }
 
-        componentWillMount() {
+        componentDidMount() {
             this.requestInterceptor = axios.interceptors.request.use(request => {
                 this.setState({error: null});
                 return request;
@@ -44,5 +44,3 @@ const withErrorHandler = (WrappedComponent, axios) => {
 }
  
 export default withErrorHandler;
-
-//useEffect = componentDidMount

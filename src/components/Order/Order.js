@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Order.module.scss';
 
-const Order = (props) => {
+const order = (props) => {
     const ingredients = [];
     for (let ingredientName in props.ingredients) {
         if (props.ingredients[ingredientName] !== 0) {
@@ -30,4 +30,4 @@ const Order = (props) => {
     );
 }
  
-export default Order;
+export default order;
