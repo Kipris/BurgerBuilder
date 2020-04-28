@@ -10,7 +10,7 @@ export const addIngredient = (ingredientName) => {
 
 export const removeIngredient = (ingredientName) => {
     return {
-        type: actionTypes.ADD_INGREDIENT,
+        type: actionTypes.REMOVE_INGREDIENT,
         ingredientName
     }
 }
