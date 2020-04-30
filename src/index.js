@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
-import { watchAuth } from './store/sagas/index';
+import { watchAuth, watchBurgerBuilder } from './store/sagas/index';
 
 const rootReducer = combineReducers({
   burgerBuilder: burgerBuilderReducer,
@@ -29,6 +29,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, sagaMiddleware)));
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchBurgerBuilder);
 
 ReactDOM.render(
   <React.StrictMode>
